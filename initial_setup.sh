@@ -47,4 +47,6 @@ fi
 # end
 if [ "$USING_GITHUB" = true ] ; then
     git add .
+    git commit -m "Initial commit" -n
+    git push --set-upstream origin master
 fi
