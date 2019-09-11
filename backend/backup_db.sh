@@ -1,0 +1,1 @@
+docker exec root_mysql_1 /usr/bin/mysqldump -u root --password=prisma PROJECTNAME@dev > backup.sql

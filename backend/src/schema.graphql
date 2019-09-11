@@ -1,0 +1,382 @@
+# import * from './generated/prisma.graphql'
+
+scalar Upload
+
+type SuccessMessage {
+  message: String
+}
+
+type MailReturnMessage {
+  message: String
+  code: Int
+}
+
+type ReturnBool {
+  result: Boolean
+}
+
+type Mutation {
+  createUser(
+    firstName: String!
+    lastName: String!
+    workerNo: String!
+    email: String!
+    company: ID
+    phone: Int
+    mobile: Int
+    profileImage: String
+    # role: String
+    password: String!
+    lastLogin: DateTime
+    title: String
+    gender: String
+    fax: String
+    address: AddressCreateOneInput
+  ): User!
+  createAddress(
+    street: String!
+    houseNo: String!
+    city: String!
+    state: String
+    country: String!
+  ): Address!
+  updateUser(
+    id: ID!
+    firstName: String
+    lastName: String
+    workerNo: String
+    email: String
+    company: ID
+    phone: Int
+    mobile: Int
+    profileImage: String
+    # role: String
+    password: String
+    lastLogin: DateTime
+    title: String
+    gender: String
+    fax: String
+    address: AddressUpdateOneInput
+  ): User!
+  updateAddress(
+    id: ID!
+    street: String
+    houseNo: String
+    city: String
+    state: String
+    country: String
+  ): Address!
+  deleteUser(id: ID!): User
+  deleteAddress(id: ID!): Address
+  signup(
+    email: String!
+    password: String!
+    firstName: String!
+    lastName: String!
+    workerNo: String!
+  ): User!
+  signin(email: String!, password: String!): User!
+  signout: SuccessMessage
+  requestReset(email: String!): SuccessMessage
+  resetPassword(
+    resetToken: String!
+    password: String!
+    confirmPassword: String!
+  ): User!
+  setUserPermissions(id: ID!, permissions: [Permission!]!): User!
+  createSettings(data: SettingsCreateInput): Settings!
+  updateSettings(
+    id: ID!
+    themeColorPrimary: String
+    themeColorSecondary: String
+    boardPrioCaptions: [String!]
+  ): Settings!
+  deleteSettings(id: ID!): Settings
+  deleteMultiSettingses(where: SettingsWhereInput): BatchPayload!
+  createBulletpoint(
+    title: String!
+    category: Int!
+    dueDate: DateTime
+    closedDate: DateTime
+    notes: String
+  ): Bulletpoint!
+  updateBulletpoint(
+    id: ID!
+    title: String
+    category: Int
+    dueDate: DateTime
+    closedDate: DateTime
+    notes: String
+  ): Bulletpoint!
+  closeBulletpoint(id: ID!): Bulletpoint
+  deleteBulletpoint(id: ID!): Bulletpoint
+  createMailTemplate(
+    subject: String!
+    body: String!
+    eventType: String!
+  ): MailTemplate!
+  updateMailTemplate(
+    id: ID!
+    subject: String
+    body: String
+    eventType: String
+  ): MailTemplate
+  deleteMailTemplate(id: ID!): MailTemplate
+  createSentMail(
+    msgId: String!
+    msgType: String!
+    receiverMail: String!
+    senderMail: String!
+    subject: String!
+    timestamp: DateTime!
+    context: String
+  ): SentMail!
+  sendEventInvite(
+    receiverMail: String!
+    subject: String!
+    body: String!
+    bodyAsText: String!
+    attendeeId: ID!
+  ): SuccessMessage
+  sendEventFollowUp(
+    receiverMail: String!
+    subject: String!
+    body: String!
+    bodyAsText: String!
+    attachments: [String]
+  ): MailReturnMessage
+  uploadFile(file: Upload!): File!
+  uploadFiles(files: [Upload!]!): [File!]!
+  renameFile(id: ID!, name: String!): File
+  deleteFile(id: ID!): File
+  createCustomer(
+    representative: ID!
+    company: ID!
+    firstName: String!
+    lastName: String!
+    customerNo: String
+    refName: String
+    taxId: String
+    notes: String
+    phone: String
+    mobile: String
+    fax: String
+    website: String
+    email: String
+    address: ID
+    active: Boolean
+  ): Customer!
+  deleteCustomer(id: ID!): Customer
+  createZipCode(
+    code: String!
+    city: String!
+    state: String
+    country: String
+  ): ZipCode!
+  createChannel(
+    name: String!
+    description: String
+    icon: String
+    url: String!
+  ): Channel!
+  deleteChannel(id: ID!): Channel
+  updateChannel(
+    id: ID!
+    name: String
+    description: String
+    icon: String
+    url: String
+  ): Channel!
+  createHolidays(
+    date: DateTime
+    name: String
+    restrictions: String
+    global: Boolean
+  ): Holidays!
+  deleteHolidays(id: ID!): Holidays
+  updateHolidays(
+    id: ID!
+    date: DateTime
+    name: String
+    restrictions: String
+    global: Boolean
+  ): Holidays!
+  createNameDay(date: DateTime!, names: [String!]!, global: Boolean): NameDays!
+  deleteNameDays(id: ID!): NameDays
+  updateNameDays(
+    id: ID!
+    date: DateTime!
+    names: [String!]!
+    global: Boolean
+  ): NameDays!
+  createContent(
+    title: String!
+    body: String!
+    topic: String
+    short_description: String
+    notes: String
+    link: String
+    delivery_date: DateTime
+    responsible: ID
+    status: String
+    seeding: String
+    channel_content: [ID!]
+  ): Content!
+  deleteContent(id: ID!): Content
+  updateContent(
+    id: ID!
+    title: String
+    body: String
+    topic: String
+    short_description: String
+    notes: String
+    link: String
+    delivery_date: DateTime
+    responsible: ID
+    status: String
+    seeding: String
+    channel_content: [ID!]
+  ): Content!
+  createChannelContent(
+    channel: ID!
+    content: ID!
+    released: Boolean
+  ): ChannelContent!
+  deleteChannelContent(id: ID!): ChannelContent
+  updateChannelContent(
+    id: ID!
+    channel: ID!
+    content: ID!
+    released: Boolean
+  ): ChannelContent!
+  createCompany(
+    name: String!
+    logo: String
+    notes: String
+    phone: String
+    mobile: String
+    fax: String
+    email: String
+    street: String
+    houseNo: String
+    website: String
+    zip: String
+  ): Company!
+  deleteCompany(id: ID!): Company
+  updateCompany(
+    id: ID!
+    name: String
+    logo: String
+    notes: String
+    phone: String
+    mobile: String
+    fax: String
+    email: String
+    street: String
+    houseNo: String
+    website: String
+    zip: String
+  ): Company!
+}
+
+type Query {
+  users(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    first: Int
+  ): [User]!
+  user(id: ID!): User
+  usersConnection(where: UserWhereInput): UserConnection!
+  me: User
+  allSettings: [Settings]
+  userSettings(
+    where: SettingsWhereInput
+    orderBy: SettingsOrderByInput
+    skip: Int
+    first: Int
+  ): Settings
+  workers(where: UserWhereInput, orderBy: UserOrderByInput): [User]!
+  bulletpoints(
+    where: BulletpointWhereInput
+    orderBy: BulletpointOrderByInput
+    skip: Int
+    first: Int
+  ): [Bulletpoint]!
+  bulletpoint(where: BulletpointWhereUniqueInput!): Bulletpoint
+  bulletpointsConnection(where: BulletpointWhereInput): BulletpointConnection!
+  myBulletpoints(orderBy: BulletpointOrderByInput): [Bulletpoint]
+  myBulletpointsHistory: [Bulletpoint]
+  file(id: ID!): File
+  files: [File!]!
+  mailTemplates(
+    where: MailTemplateWhereInput
+    orderBy: MailTemplateOrderByInput
+    skip: Int
+    first: Int
+  ): [MailTemplate]!
+  getTemplate(
+    where: MailTemplateWhereInput
+    orderBy: MailTemplateOrderByInput
+    skip: Int
+    first: Int
+  ): MailTemplate
+  allSentMails: [SentMail]!
+  allSentMailsPaged(skip: Int, first: Int): [SentMail]!
+  allSentMailsConnection: SentMailConnection!
+  allZipCodes: [ZipCode]!
+  myCustomers(representative: ID!): [Customer]!
+  myCustomersConnection(
+    representative: ID!
+    active: Boolean
+  ): CustomerConnection!
+  myInactiveCustomersConnection(representative: ID!): CustomerConnection!
+  myCustomersPaged(representative: ID!, skip: Int, first: Int): [Customer]!
+  myInactiveCustomersPaged(
+    representative: ID!
+    skip: Int
+    first: Int
+  ): [Customer]!
+  channel(id: ID!): Channel!
+  channels: [Channel]
+  channelsConnection: ChannelConnection!
+  channelsPaged(skip: Int, first: Int): [Channel]!
+  holiday(id: ID!): Holidays!
+  holidays: [Holidays]
+  holidaysConnection: HolidaysConnection!
+  holidaysPaged(skip: Int, first: Int): [Holidays]!
+  nameDay(id: ID!): NameDays!
+  nameDays: [NameDays]
+  nameDaysConnection: NameDaysConnection!
+  nameDaysPaged(skip: Int, first: Int): [NameDays]!
+  content(id: ID!): Content!
+  contents: [Content]
+  contentsConnection: ContentConnection!
+  contentsPaged(skip: Int, first: Int): [Content]!
+  channelContent(id: ID!): ChannelContent!
+  channelContents: [ChannelContent]
+  channelContentsConnection: ChannelContentConnection!
+  channelContentsPaged(skip: Int, first: Int): [ChannelContent]!
+  company(id: ID!): Company!
+  companies: [Company]
+  companiesConnection: CompanyConnection!
+  companiesPaged(skip: Int, first: Int): [Company]!
+}
+
+type User {
+  id: ID!
+  company: ID
+  firstName: String!
+  lastName: String!
+  email: String!
+  workerNo: String!
+  phone: Int
+  mobile: Int
+  profileImage: String
+  permissions: [Permission!]!
+  lastLogin: DateTime
+  title: String
+  gender: String
+  fax: String
+  address: Address
+}

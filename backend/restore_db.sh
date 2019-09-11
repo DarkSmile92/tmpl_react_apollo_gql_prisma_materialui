@@ -1,0 +1,1 @@
+cat backup.sql | docker exec -i root_mysql_1 /usr/bin/mysql -u root --password=prisma skyfall@dev

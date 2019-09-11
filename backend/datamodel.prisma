@@ -1,0 +1,239 @@
+enum Permission {
+  ADMIN
+  USER
+  USERCREATE
+  USERUPDATE
+  USERDELETE
+  CONTENTCREATE
+  CONTENTREAD
+  CONTENTUPDATE
+  CONTENTDELETE
+  CUSTOMERSCREATE
+  CUSTOMERSREAD
+  CUSTOMERSUPDATE
+  CUSTOMERSDELETE
+  PERMISSIONUPDATE
+  SCHEDULEMANAGEMENT
+  CTRLVIEWACTIVITIES
+  CTRLVIEWLOG
+  CTRLVIEWSTATS
+  MAILTMPL
+  DOCUMNGMT
+}
+
+enum TargetType {
+  FACEBOOK
+  INSTAGRAM
+  SNAPCHAT
+  MASTODON
+  BLOG
+  WEBSITE
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  NOTDEFINED
+}
+
+enum Title {
+  HERR
+  FRAU
+  HERRDR
+  FRAUDR
+}
+
+enum PaymentCycle {
+  MONATLICH
+  QUARTAL
+  HALBJAEHRLICH
+  JAEHRLICH
+}
+
+type User {
+  id: ID! @unique
+  firstName: String!
+  lastName: String!
+  email: String! @unique
+  workerNo: String!
+  company: Company
+  phone: Int
+  mobile: Int
+  profileImage: String
+  # role: String @default(value: "user")
+  permissions: [Permission]
+  password: String!
+  resetToken: String
+  resetTokenExpiry: Float
+
+  lastLogin: DateTime
+  title: String
+  gender: String
+  jobTitle: String
+  fax: String
+  address: Address
+}
+
+type Address {
+  id: ID! @unique
+  street: String!
+  houseNo: String!
+  city: String!
+  state: String
+  country: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Bulletpoint {
+  id: ID! @unique
+  user: User!
+  title: String!
+  category: Int!
+  dueDate: DateTime
+  closedDate: DateTime
+  notes: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Settings {
+  id: ID! @unique
+  user: User!
+  boardPrioCaptions: [String!]
+  # boardPrioOneName: String
+  # boardPrioTwoName: String
+  # boardPrioDoneName: String
+  # boardPrioExtra1Name: String
+  # boardPrioExtra2Name: String
+  settingColumns: [String]
+  themeColorPrimary: String @default(value: "deepOrange")
+  themeColorSecondary: String @default(value: "orange")
+}
+
+type ZipCode {
+  id: ID! @unique
+  code: String!
+  city: String!
+  state: String
+  country: String
+}
+
+type Company {
+  id: ID! @unique
+  name: String!
+  logo: String
+  notes: String
+  phone: String
+  mobile: String
+  fax: String
+  email: String
+  street: String
+  houseNo: String
+  website: String
+  zip: ZipCode
+}
+
+type Customer {
+  id: ID! @unique
+  representative: User!
+  company: Company!
+  firstName: String!
+  lastName: String!
+  customerNo: String
+  refName: String
+  taxId: String
+  notes: String
+  phone: String
+  mobile: String
+  fax: String
+  website: String
+  email: String
+  address: Address
+  active: Boolean
+}
+
+type Metric {
+  id: ID! @unique
+  user: User!
+  eventType: String!
+  dataString: String
+  custId: String
+  leadId: String
+  filename: String
+}
+
+type File {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  filename: String!
+  mimetype: String!
+  encoding: String!
+  url: String! @unique
+}
+
+type MailTemplate {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  subject: String!
+  body: String!
+  eventType: String!
+}
+
+type SentMail {
+  id: ID! @unique
+  msgId: String!
+  msgType: String!
+  receiverMail: String!
+  senderMail: String!
+  subject: String!
+  timestamp: DateTime!
+  context: String
+}
+
+type Channel {
+  id: ID! @unique
+  name: String! @unique
+  description: String
+  icon: String
+  url: String!
+}
+
+type Holidays {
+  id: ID! @unique
+  date: DateTime!
+  name: String!
+  restrictions: String
+  global: Boolean @default(value: true)
+}
+
+type NameDays {
+  id: ID! @unique
+  date: DateTime!
+  names: [String!]!
+  global: Boolean @default(value: true)
+}
+
+type Content {
+  id: ID! @unique
+  title: String!
+  body: String!
+  topic: String
+  short_description: String
+  notes: String
+  link: String
+  delivery_date: DateTime
+  responsible: User
+  status: String
+  seeding: String
+  channel_content: [ChannelContent!]
+}
+
+type ChannelContent {
+  id: ID! @unique
+  channel: Channel!
+  content: Content!
+  released: Boolean @default(value: false)
+}

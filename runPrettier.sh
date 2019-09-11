@@ -1,0 +1,1 @@
+sudo prettier --single-quote --trailing-comma es5 --tab-width 2 --jsx-bracket-same-line --write $1

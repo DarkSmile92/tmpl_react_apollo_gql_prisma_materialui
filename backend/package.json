@@ -1,0 +1,41 @@
+{
+  "name": "PROJECTNAME-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Robin Kretzschmar",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "nodemon -e js,graphql -x node src/index.js",
+    "dev": "nodemon --experimental-modules -e js,graphql -x node --inspect src/index.js",
+    "test": "jest",
+    "deploy": "prisma deploy --env-file variables.env"
+  },
+  "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "bcryptjs": "2.4.3",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "8.1.0",
+    "graphql": "^14.5.4",
+    "graphql-cli": "^3.0.14",
+    "graphql-middleware": "^4.0.1",
+    "graphql-upload": "^8.0.7",
+    "graphql-yoga": "^1.18.3",
+    "jsonwebtoken": "8.5.1",
+    "mkdirp": "^0.5.1",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.26",
+    "nodemailer": "^6.3.0",
+    "nodemon": "^1.19.2",
+    "npm-run-all": "^4.1.5",
+    "prisma": "^1.34.8",
+    "prisma-binding": "^2.3.16",
+    "stripe": "^7.8.0",
+    "uuid": "^3.3.3"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  }
+}
