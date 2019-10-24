@@ -5,6 +5,7 @@ import BrandedAppBar from '../components/appBar';
 import BrandedDrawer from '../components/drawer';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import ErrorBoundary from './ErrorBoundary';
 import Link from '@material-ui/core/Link';
 import Meta from '../components/Meta';
 import { Paper } from '@material-ui/core';
@@ -109,7 +110,7 @@ const Page = ({ curUser, children }) => {
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />
             <Container maxWidth="lg" className={classes.container}>
-              {children}
+              <ErrorBoundary>{children}</ErrorBoundary>
             </Container>
             <Copyright />
           </main>
