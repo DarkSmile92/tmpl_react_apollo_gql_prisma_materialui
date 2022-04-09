@@ -51,7 +51,7 @@
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",
     "material-ui-color-picker": "^3.4.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "moment-range": "^4.0.2",
     "next": "^9.2.1",
     "next-with-apollo": "^5.0.0",
