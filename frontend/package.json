@@ -65,7 +65,7 @@
     "react-lazyload": "^2.6.5",
     "react-moment": "^0.9.7",
     "react-transition-group": "^4.3.0",
-    "recharts": "^1.8.5",
+    "recharts": "^2.1.14",
     "styled-components": "^5.0.1",
     "waait": "^1.0.5"
   },
